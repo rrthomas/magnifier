@@ -14,14 +14,12 @@
 
      $.fn.extend({magnifier:function(config, small, large) {
                       config = $.extend({}, $.magnifier.defaults, config);
-                      var wrap = this;
-
-                      wrap.html(
+                      this.html(
                                 '<div style="position: relative"><img src="'+small+'" />' +
 	                        '<div id="'+config.mover+'"></div></div>'
                                 );
 
-                      var smallArea = $(':first-child', wrap);
+                      var smallArea = $(':first-child', this);
                       var mover = $("#"+config.mover);
                       mover.css({ backgroundImage: "url('"+large+"')", backgroundRepeat: "no-repeat" });
 
