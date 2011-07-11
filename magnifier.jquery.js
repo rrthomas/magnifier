@@ -16,13 +16,12 @@
                       config = $.extend({}, $.magnifier.defaults, config);
                       var wrap = this;
 
-                      wrap.html('<div style="position: relative">' +
-                                '<div style="position: relative"><img src="'+small+'" /></div>' +
-	                        '<div id="'+config.mover+'"></div>' +
-                                '</div>');
+                      wrap.html(
+                                '<div style="position: relative"><img src="'+small+'" />' +
+	                        '<div id="'+config.mover+'"></div></div>'
+                                );
 
-                      var innerWrap = $(':first-child', wrap);
-                      var smallArea = $(':first-child', innerWrap);
+                      var smallArea = $(':first-child', wrap);
                       var mover = $("#"+config.mover);
                       mover.css({ backgroundImage: "url('"+large+"')", backgroundRepeat: "no-repeat" });
 
@@ -33,7 +32,7 @@
                                          var x_offset = mover.width() / 2;
                                          var y_offset = mover.height() / 2;
 
-                                         innerWrap
+                                         smallArea
                                              .mousemove(function (e) {
                                                             var x = e.pageX - $("img", smallArea).offset().left;
                                                             var y = e.pageY - $("img", smallArea).offset().top;
