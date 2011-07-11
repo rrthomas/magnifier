@@ -4,11 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Magnifier</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="magnifier.jquery.js"></script>
     <script type="text/javascript">
       $(function () {
-	  $("#wrap").magnifier({});
+	  $("#wrap").magnifier({}, "rushmore_small.jpg", "rushmore.jpg");
       });
     </script>
   </head>
@@ -16,22 +16,11 @@
   <body id="image">
     <div id="main-content">
 
-      <h1>Magnifier <span style="font-size: 20px;">2.0</span></h1>
+      <h1>Magnifier <span style="font-size: 20px;">2.1</span></h1>
 
       <p>Mouse over to magnify.</p>
 
-      <div id="wrap">
-	<div id="innerwrap">
-	  <div id="small">
-	    <img src="rushmore_small.jpg" alt="small rushmore" />
-	  </div>
-	  <div id="mover">
-	    <div id="large">
-	      <img src="rushmore.jpg" alt="big rushmore" />
-	    </div>
-	  </div>
-	</div>
-      </div>
+      <div id="wrap"></div>
     </div>
   </body>
 </html>

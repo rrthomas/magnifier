@@ -1,71 +1,59 @@
 /*
-  Magnifier: a jQuery Plugin (tested with 1.6.1)
-  Version 2.0
-  (c) Reuben Thomas 2011
-  This code is in the public domain.
+ Magnifier: a jQuery Plugin (tested with 1.6.1)
+ Version 2.1
+ (c) Reuben Thomas 2011
+ This code is in the public domain.
 
-  Based on AnythingZoomer version 1.0 by Chris Coyier
-  http://css-tricks.com/anythingzoomer-jquery-plugin/
-  License: "Note: You can do whatever the heck you want with this."
-*/
+ Based on AnythingZoomer version 1.0 by Chris Coyier
+ http://css-tricks.com/anythingzoomer-jquery-plugin/
+ License: "Note: You can do whatever the heck you want with this."
+ */
 
 (function($) {
-    $.magnifier = {
-        defaults: {
-            innerWrap: "#innerwrap",
-            smallArea: "#small",
-            mover: "#mover",
-            largeArea: "#large"
-        }
-    };
+     $.magnifier = { defaults: { mover: "mover" } };
 
-    $.fn.extend({
-        magnifier:function(config) {
-            config = $.extend({}, $.magnifier.defaults, config);
+     $.fn.extend({magnifier:function(config, small, large) {
+                      config = $.extend({}, $.magnifier.defaults, config);
+                      var wrap = this;
 
-            var wrap = this;
-            var innerWrap = $(config.innerWrap);
-            var smallArea = $(config.smallArea);
-            var mover = $(config.mover);
-            var largeArea = $(config.largeArea);
+                      wrap.html('<div style="position: relative">' +
+                                '<div style="position: relative"><img src="'+small+'" /></div>' +
+	                        '<div id="'+config.mover+'"></div>' +
+                                '</div>');
 
-            smallArea.show();
+                      var innerWrap = $(':first-child', wrap);
+                      var smallArea = $(':first-child', innerWrap);
+                      var mover = $("#"+config.mover);
+                      mover.css({ backgroundImage: "url('"+large+"')", backgroundRepeat: "no-repeat" });
 
-            innerWrap
-                .css({ width: "auto" })
-                .mousemove(function (e) {
-                    var x = e.pageX - smallArea.offset().left;
-                    var y = e.pageY - smallArea.offset().top;
-                    var x_offset = mover.width() / 2;
-                    var y_offset = mover.height() / 2;
+                      var largeImg = new Image();
+                      largeImg.src = large;
 
-                    wrap
-                        .width($("img", smallArea).width())
-                        .height($("img", smallArea).height());
-                    // FIXME: Shouldn't need to set this, but if I don't it is 4 pixels taller than wrap
-                    smallArea
-                        .width($("img", smallArea).width())
-                        .height($("img", smallArea).height());
+                      $(window).load(function () {
+                                         var x_offset = mover.width() / 2;
+                                         var y_offset = mover.height() / 2;
 
-                    // FIXME: Should be able to use hover event, but doesn't work (as of jquery 1.6.1)
-                    if (x < 0 || x > smallArea.width() || y < 0 || y > smallArea.height()) {
-                        mover.hide();
-                    } else {
-                        mover.show();
-                    }
+                                         innerWrap
+                                             .mousemove(function (e) {
+                                                            var x = e.pageX - $("img", smallArea).offset().left;
+                                                            var y = e.pageY - $("img", smallArea).offset().top;
 
-                    mover.css({
-                        left: x - x_offset,
-                        top: y - y_offset
-                    });
+                                                            // FIXME: Should be able to use hover event
+                                                            if (x < 0 || x > $("img", smallArea).width() || y < 0 || y > $("img", smallArea).height()) {
+                                                                mover.hide();
+                                                            } else {
+                                                                mover.show();
+                                                                mover.css({ left: x - x_offset, top: y - y_offset,
+                                                                            backgroundPosition: "" +
+                                                                            -(x * largeImg.width / $("img", smallArea).width() - x_offset) + "px " +
+                                                                            -(y * largeImg.height / $("img", smallArea).height() - y_offset) + "px"
+                                                                          });
+                                                            }
+                                                        });
 
-                    largeArea.css({
-                        left: -(x * $("img", largeArea).width() / smallArea.width() - x_offset),
-                        top: -(y * $("img", largeArea).height() / smallArea.height() - y_offset)
-                    });
-                });
+                                     });
 
-            return this;
-        }
-    });
-})(jQuery);
+                      return this;
+                  }
+                 });
+ })(jQuery);

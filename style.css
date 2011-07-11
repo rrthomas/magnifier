@@ -21,22 +21,11 @@ body {
 #wrap {
     position: relative;
 }
-#innerwrap {
-    position: relative;
-}
-#small {
-    position: relative;
-}
-#large {
-    position: relative;
-    background: black;
-}
 #mover {
     position: absolute;
     width: 104px;
     height: 104px;
     overflow: hidden;
     z-index: 100;
-    background: black;
     display: none;
 }
