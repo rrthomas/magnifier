@@ -25,7 +25,6 @@ body {
     position: absolute;
     width: 104px;
     height: 104px;
-    overflow: hidden;
     z-index: 100;
     display: none;
     background: white;
