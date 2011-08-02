@@ -17,6 +17,7 @@ body {
 /* For the mover */
 #wrap {
     position: relative;
+    overflow: hidden;
 }
 #mover {
     position: absolute;
