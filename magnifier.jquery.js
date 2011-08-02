@@ -1,6 +1,6 @@
 /*
  Magnifier: a jQuery Plugin (tested with 1.6.2)
- Version 2.1
+ Version 2.2
  (c) Reuben Thomas 2011
  This code is in the public domain.
 
@@ -16,7 +16,7 @@
                       config = $.extend({}, $.magnifier.defaults, config);
                       this.html(
                                 '<div style="position: relative"><img src="'+small+'" />' +
-	                        '<div id="'+config.mover+'"></div></div>'
+                                '<div id="'+config.mover+'"></div></div>'
                                 );
 
                       var smallArea = $(':first-child', this);
