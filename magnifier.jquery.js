@@ -7,46 +7,57 @@
   Based on AnythingZoomer version 1.0 by Chris Coyier
   http://css-tricks.com/anythingzoomer-jquery-plugin/
   License: "Note: You can do whatever the heck you want with this."
+
+  Usage: write some HTML with the following structure:
+
+    <div id="wrap">
+      <small_contents />
+      <div id="mover"><large_contents /></div>
+    </div>
+
+  An example is shown in the included index.html under the comment
+  "Magnifier". When the pointer is over the "small_contents" element,
+  the corresponding part of the "large_contents" is shown inside
+  moving window, the "mover" div, mapped proportionally to the
+  "small_contents" element.
+
+  Required CSS is shown in style.css, and the HTML required to set up
+  magnifier in the "head" element is shown in index.html under
+  "Magnifier setup".
+
 */
 
+// Argument is object, with following elements permitted:
+// mover: id for mover div [default "mover"]
 (function($) {
     $.magnifier = { defaults: { mover: "mover" } };
 
-    $.fn.extend({magnifier:function(config, small, large) {
+    $.fn.extend({magnifier:function(config) {
         config = $.extend({}, $.magnifier.defaults, config);
         var wrap = this;
-        wrap.html(
-            '<div style="position: relative;"><img src="'+small+'" /></div>' +
-                '<div id="'+config.mover+'"><div style="position: absolute;"><img src="'+large+'" /></div></div>'
-        );
-        var smallArea = $(':first-child', wrap);
+        var smallContents = $(':first-child', wrap);
         var mover = $("#"+config.mover);
-        var largeArea = $(':first-child', mover);
-
-        var smallImg = new Image();
-        smallImg.src = small;
-        var largeImg = new Image();
-        largeImg.src = large;
+        var largeContents = $(':first-child', mover);
 
         $(window).load(function () {
             var x_offset = mover.width() / 2;
             var y_offset = mover.height() / 2;
 
             wrap
-                .width(smallImg.width)
-                .height(smallImg.height)
+                .width(smallContents.width())
+                .height(smallContents.height())
                 .mousemove(function (e) {
-                    var x = e.pageX - smallArea.offset().left;
-                    var y = e.pageY - smallArea.offset().top;
+                    var x = e.pageX - wrap.offset().left;
+                    var y = e.pageY - wrap.offset().top;
 
                     mover.css({
                         left: x - x_offset,
                         top: y - y_offset
                     });
 
-                    largeArea.css({
-                        left: -(x * largeImg.width / smallImg.width - x_offset),
-                        top: -(y * largeImg.height / smallImg.height - y_offset)
+                    largeContents.css({
+                        left: -(x * largeContents.width() / smallContents.width() - x_offset),
+                        top: -(y * largeContents.height() / smallContents.height() - y_offset)
                     });
                 })
                 .mouseover(function (e) { mover.show(); })

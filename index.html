@@ -5,12 +5,15 @@
     <title>Magnifier</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+    <!-- Magnifier setup -->
     <script type="text/javascript" src="magnifier.jquery.js"></script>
     <script type="text/javascript">
       $(function () {
-          $("#wrap").magnifier({}, "rushmore_small.jpg", "rushmore.jpg");
+          $("#wrap").magnifier({});
       });
     </script>
+
   </head>
 
   <body id="image">
@@ -22,7 +25,12 @@
 
       <p>Mouse over the image to magnify it.</p>
 
-      <div id="wrap"></div>
+      <!-- Magnifier -->
+      <div id="wrap">
+        <img src="rushmore_small.jpg" />
+        <div id="mover"><img style="position: absolute" src="rushmore.jpg" /></div>
+      </div>
+
     </div>
   </body>
 </html>
