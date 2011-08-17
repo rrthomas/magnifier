@@ -46,7 +46,7 @@
 
                     largeArea.css({
                         left: -(x * largeImg.width / smallImg.width - x_offset),
-                        top: -(y * largeImg.height / smallImg.height - y_offset),
+                        top: -(y * largeImg.height / smallImg.height - y_offset)
                     });
                 })
                 .mouseover(function (e) { mover.show(); })
