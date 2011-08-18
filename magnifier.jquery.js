@@ -62,8 +62,8 @@
                     top: -(y * largeContents.height() / smallContents.height() - y_offset)
                 });
             })
-            .mouseover(function (e) { mover.show(); })
-            .mouseout(function (e) { mover.hide(); });
+            .mouseenter(function (e) { mover.show(); })
+            .mouseleave(function (e) { mover.hide(); });
 
         return this;
     }});
