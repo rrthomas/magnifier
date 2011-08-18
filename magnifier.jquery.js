@@ -25,6 +25,9 @@
   magnifier in the "head" element is shown in index.html under
   "Magnifier setup".
 
+  N.B.: The small_contents element must be visible when the magnifier
+  is initialised.
+
 */
 
 // Argument is object, with following elements permitted:
@@ -32,37 +35,35 @@
 (function($) {
     $.magnifier = { defaults: { mover: "mover" } };
 
-    $.fn.extend({magnifier:function(config) {
+    $.fn.extend({magnifier:function (config) {
         config = $.extend({}, $.magnifier.defaults, config);
         var wrap = this;
         var smallContents = $(':first', wrap);
         var mover = $("#"+config.mover);
         var largeContents = $(':first', mover);
 
-        $(window).load(function () {
-            var x_offset = mover.width() / 2;
-            var y_offset = mover.height() / 2;
+        var x_offset = mover.width() / 2;
+        var y_offset = mover.height() / 2;
 
-            wrap
-                .width(smallContents.width())
-                .height(smallContents.height())
-                .mousemove(function (e) {
-                    var x = e.pageX - wrap.offset().left;
-                    var y = e.pageY - wrap.offset().top;
+        wrap
+            .width(smallContents.width())
+            .height(smallContents.height())
+            .mousemove(function (e) {
+                var x = e.pageX - wrap.offset().left;
+                var y = e.pageY - wrap.offset().top;
 
-                    mover.css({
-                        left: x - x_offset,
-                        top: y - y_offset
-                    });
+                mover.css({
+                    left: x - x_offset,
+                    top: y - y_offset
+                });
 
-                    largeContents.css({
-                        left: -(x * largeContents.width() / smallContents.width() - x_offset),
-                        top: -(y * largeContents.height() / smallContents.height() - y_offset)
-                    });
-                })
-                .mouseover(function (e) { mover.show(); })
-                .mouseout(function (e) { mover.hide(); });
-        });
+                largeContents.css({
+                    left: -(x * largeContents.width() / smallContents.width() - x_offset),
+                    top: -(y * largeContents.height() / smallContents.height() - y_offset)
+                });
+            })
+            .mouseover(function (e) { mover.show(); })
+            .mouseout(function (e) { mover.hide(); });
 
         return this;
     }});
