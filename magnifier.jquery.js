@@ -35,9 +35,9 @@
     $.fn.extend({magnifier:function(config) {
         config = $.extend({}, $.magnifier.defaults, config);
         var wrap = this;
-        var smallContents = $(':first-child', wrap);
+        var smallContents = $(':first', wrap);
         var mover = $("#"+config.mover);
-        var largeContents = $(':first-child', mover);
+        var largeContents = $(':first', mover);
 
         $(window).load(function () {
             var x_offset = mover.width() / 2;
