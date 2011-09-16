@@ -12,7 +12,7 @@
 
     <div id="wrap">
       <small_contents />
-      <div id="mover"><large_contents /></div>
+      <div id="mover"><large_contents style="position: absolute" /></div>
     </div>
 
   An example is shown in the included index.html under the comment
