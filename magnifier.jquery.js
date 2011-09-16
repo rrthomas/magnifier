@@ -25,7 +25,7 @@
   magnifier in the "head" element is shown in index.html under
   "Magnifier setup".
 
-  N.B.: The small_contents element must be visible when the magnifier
+  N.B.: The small_contents element must be displayed when the magnifier
   is initialised.
 
 */
