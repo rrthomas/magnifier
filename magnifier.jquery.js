@@ -1,5 +1,5 @@
 /*
-  Magnifier: a jQuery Plugin (tested with 1.6.2)
+  Magnifier: a jQuery Plugin (tested with 1.6.4)
   Version 2.4
   (c) Reuben Thomas 2011
   This code is in the public domain.
